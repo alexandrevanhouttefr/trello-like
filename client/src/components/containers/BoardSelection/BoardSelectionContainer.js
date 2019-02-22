@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-import CreateBoard from './CreateBoard';
-import CreateBoardForm from './CreateBoardForm';
+import CreateBoard from './BoardCreation/CreateBoard';
+import CreateBoardForm from './BoardCreation/CreateBoardForm';
+import BoardSelectionCard from "./BoardSelectionCard";
 
-class CreateBoardContainer extends Component {
+class BoardSelectionContainer extends Component {
 
     constructor(props) {
         super(props);
@@ -16,9 +17,9 @@ class CreateBoardContainer extends Component {
         const { boardCollection } = this.props;
         return boardCollection.map((item) => {
             return (
-                <div className="board" key={item.id}>
-                    {item.title}
-                </div>
+                <BoardSelectionCard
+                    key={item.id} title={item.title}
+                ></BoardSelectionCard>
             );
         })
     }
@@ -37,7 +38,7 @@ class CreateBoardContainer extends Component {
     }
 };
 
-CreateBoardContainer.propTypes = {
+BoardSelectionContainer.propTypes = {
     newBoard: PropTypes.object
 };
 
@@ -48,4 +49,4 @@ function mapStateToProps({ createBoard, boardCollection }) {
     };
 };
 
-export default connect(mapStateToProps)(CreateBoardContainer);
+export default connect(mapStateToProps)(BoardSelectionContainer);

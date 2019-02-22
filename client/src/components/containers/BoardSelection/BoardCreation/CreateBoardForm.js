@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import submitNewBoard from './../../../actions/SubmitNewBoard';
-import CreateNewBoard from './../../../actions/CreateNewBoard';
+import submitNewBoard from '../../../../actions/SubmitNewBoard';
+import CreateNewBoard from '../../../../actions/CreateNewBoard';
 
-import '../../Style/CreateBoardForm.css';
+import '../../../../styles/CreateBoardForm.css';
 
 class CreateBoardForm extends Component {
 

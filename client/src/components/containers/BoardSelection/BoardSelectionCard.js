@@ -1,9 +1,11 @@
 import React from 'react';
 
-const CreateBoard = function(props) {
+const BoardSelectionCard = function(props) {
     return (
-        <div className="create-board-wrapper" onClick={ () => createNewBoard() }>
-            <h3>Create</h3>
+        <div className="board" key={props.id}>
+            {props.title}
         </div>
     );
 };
+
+export default BoardSelectionCard;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Header from '../containers/Header';
-import CreateBoardContainer from '../containers/BoardSelection/BoardSelectionContainer';
+import Header from './containers/Header';
+import CreateBoardContainer from './containers/BoardSelection/BoardSelectionContainer';
 
 class Board extends Component {
 

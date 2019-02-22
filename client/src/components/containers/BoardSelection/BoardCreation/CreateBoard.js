@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux'
 
-import '../../Style/CreateBoard.css';
-import createNewBoard from "../../../actions/CreateNewBoard";
+import createNewBoard from "../../../../actions/CreateNewBoard";
+
+import '../../../../styles/CreateBoard.css';
 
 const CreateBoard = function({createNewBoard}) {
     return (
