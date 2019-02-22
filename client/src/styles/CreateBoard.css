@@ -1,0 +1,22 @@
+.create-board-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #8998D5;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: transform .2s;
+
+}
+
+.create-board-wrapper:hover {
+    transform: scale(1.05);
+}
+
+h3 {
+    color: white;
+}
