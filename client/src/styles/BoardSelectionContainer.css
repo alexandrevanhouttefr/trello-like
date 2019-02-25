@@ -1,0 +1,5 @@
+.create-board-container-wrapper {
+    display: flex;
+    padding: 60px 35px;
+    flex-wrap: wrap;
+}
