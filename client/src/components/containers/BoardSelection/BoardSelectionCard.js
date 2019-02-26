@@ -101,15 +101,15 @@ class BoardSelectionCard extends Component {
             connectDragSource(
                 connectDragTarget(
                     <div className="board-selection-card-wrapper" key={this.props.id} style={{opacity}}>
+                        <Link to={'board/' + this.props.id}>
                         {this.props.title}
+                        </Link>
                     </div>
                 )
             )
         );
 
  /*       return (
-     //       <Link to={'boardDetails/' + this.props.id}>
-     //       </Link>
        );*/
     }
 };

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import CardHeader from '../../Card/CardHeader';
 import submitNewBoard from '../../../../actions/SubmitNewBoard';
 import CreateNewBoard from '../../../../actions/CreateNewBoard';
 
@@ -33,11 +34,9 @@ class CreateBoardForm extends Component {
     render() {
         return (
             <div className="create-board-form-wrapper">
-                <div className="header">
-                    <h3>Create a new Board</h3>
-                </div>
+                <CardHeader title="Create a new board" />
                 <div className="body">
-                    <form >
+                    <form onSubmit={this.submitNewBoard}>
                         <label>
                             Name of the group:
                             <input

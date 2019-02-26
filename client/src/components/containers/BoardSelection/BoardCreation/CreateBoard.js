@@ -9,7 +9,7 @@ import '../../../../styles/CreateBoard.css';
 const CreateBoard = function({createNewBoard}) {
     return (
         <div className="create-board-wrapper" onClick={ () => createNewBoard() }>
-           <h3>Create</h3>
+           <h3>Create a group</h3>
         </div>
     );
 };

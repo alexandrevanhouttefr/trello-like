@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import update from 'immutability-helper';
 
 import CreateBoard from './BoardCreation/CreateBoard';
 import CreateBoardForm from './BoardCreation/CreateBoardForm';
@@ -17,9 +16,6 @@ class BoardSelectionContainer extends Component {
 
     constructor(props) {
         super(props);
-        /*this.state = {
-            boardCollection: this.props.boardCollection,
-        };*/
         this.displayAllBoard = this.displayAllBoard.bind(this);
         this.moveCard = this.moveCard.bind(this);
     }
@@ -39,15 +35,6 @@ class BoardSelectionContainer extends Component {
         this.swapArrayElements(boardCollection, dragIndex, hoverIndex);
         this.props.updatePositionBoardInCollection(boardCollection);
         this.forceUpdate();
-        //boardCollection = boardCollection.splice([[dragIndex, 1], [hoverIndex, 0, dragCard]]);
-
-        /*this.setState(
-            update(this.state, {
-                boardCollection: {
-                    $splice: [[dragIndex, 1], [hoverIndex, 0, dragCard]],
-                },
-            }),
-        )*/
     }
 
     displayAllBoard() {
@@ -79,9 +66,6 @@ BoardSelectionContainer.propTypes = {
     newBoard: PropTypes.object
 };
 
-/*CreateBoard.propTypes = {
-    updatePositionBoardInCollection: PropTypes.func.isRequired,
-};*/    
 
 function mapStateToProps({ createBoard, boardCollection }) {
     return {
