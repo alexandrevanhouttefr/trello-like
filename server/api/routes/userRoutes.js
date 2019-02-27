@@ -8,5 +8,7 @@ module.exports = function(app) {
         .post(userController.signIn);
     app.route('/user/signup')
         .post(userController.signUp);
+    app.route('/user/signout')
+        .post(userController.signOut);
 
 };

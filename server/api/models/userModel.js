@@ -13,6 +13,10 @@ var UserSchema = new Schema({
         type: String,
         required: 'Enter the password of the user'
     },
+    passwordConf: {
+        type: String,
+        required: true,
+    },
     createdDate: {
         type: Date,
         default: Date.now
@@ -24,7 +28,7 @@ var UserSchema = new Schema({
 });
 
 UserSchema.statics.authenticate = function(username, password, next) {
-    User.findOne({username: username})
+    User.findOne({ username: username })
         .exec(function(err, user) {
             if (err) {
                 return next(err);
@@ -35,12 +39,8 @@ UserSchema.statics.authenticate = function(username, password, next) {
             }
             bcrypt.compare(password, user.password, function(err, res) {
                 if (res) {
-                    console.log("here");
                     return next(null, user);
                 } else {
-                    console.log("false");
-                    var err = new Error('User not found!');
-                    err.status = 404;
                     return next();
                 }
             })
@@ -61,10 +61,10 @@ UserSchema.pre('save',function(next) {
     var user = this;
     bcrypt.hash(user.password, 10, function(err, hash) {
         if(err) {
-            console.log(err);
             return next(err);
         }
         user.password = hash;
+        user.passwordConf = hash;
         next();
     })
 });
