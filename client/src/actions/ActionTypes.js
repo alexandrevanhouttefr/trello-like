@@ -1,3 +1,7 @@
+export const SIGN_IN = 'SIGN_IN';
+export const SIGN_UP = 'SIGN_UP';
+export const SIGN_OUT = 'SIGN_OUT';
+
 export const CREATE_NEW_BOARD = 'CREATE_NEW_BOARD';
 export const INIT_NEW_BOARD = 'INIT_NEW_BOARD';
 export const SUBMIT_NEW_BOARD_TO_COLLECTION = 'STORE_NEW_BOARD_TO_COLLECTION';

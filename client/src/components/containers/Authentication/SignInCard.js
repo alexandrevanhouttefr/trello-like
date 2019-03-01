@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 
 import '../../../styles/AuthenticationContainer.css';
+import {connect} from "react-redux";
+
+import {signIn} from "../../../actions/SignIn";
 
 
 class SignInCard extends Component {
@@ -29,10 +32,8 @@ class SignInCard extends Component {
     }
 
     handleSignIn() {
-
+        this.props.signIn(this.usernameValue, this.passwordValue);
     }
-
-
 
     render() {
         return (
@@ -62,4 +63,12 @@ class SignInCard extends Component {
     }
 }
 
-export default SignInCard;
+const mapDispatchToProps = dispatch => {
+    return ({
+        signIn: (username, password) => {
+            signIn(username, password)(dispatch);
+        }
+    })
+}
+
+export default connect(null, mapDispatchToProps)(SignInCard);
