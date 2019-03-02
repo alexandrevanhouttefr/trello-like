@@ -3,14 +3,17 @@ import {
 } from "../actions/ActionTypes";
 
 const initialState = {
-    currentUser: [],
+    token: '',
 };
 
 export default function(state = initialState, action) {
     console.log(action);
     switch (action.type) {
         case SIGN_IN:
-            return state;
+            return {
+                ...state,
+                token: action.payload.data.token,
+            };
         default:
             return state;
     }

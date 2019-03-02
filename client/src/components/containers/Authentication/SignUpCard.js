@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux";
+
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
+import {signUp} from "../../../actions/SignUp";
 
 import '../../../styles/AuthenticationContainer.css';
 
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+    },
+});
 
 class SignUpCard extends Component {
 
@@ -38,6 +54,11 @@ class SignUpCard extends Component {
 
     handleSignUp(e) {
         e.preventDefault();
+        this.props.signUp(
+            this.state.usernameValue,
+            this.state.passwordValue,
+            this.state.passwordConfirmationValue
+        );
     }
 
 
@@ -46,35 +67,40 @@ class SignUpCard extends Component {
             <div className="sign-up-card-wrapper">
                 <h3>Sign Up</h3>
                 <form>
-                    <label>
-                        Username:
-                        <input
-                            type="text"
-                            value={this.state.usernameValue}
-                            onChange={this.handleChangeUsernameValue}
-                        />
-                    </label>
-                    <label>
-                        Password:
-                        <input
-                            type="text"
-                            value={this.state.passwordValue}
-                            onChange={this.handleChangePasswordValue}
-                        />
-                    </label>
-                    <label>
-                        Password Confirmation:
-                        <input
-                            type="text"
-                            value={this.state.passwordConfirmationValue}
-                            onChange={this.handleChangePasswordConfirmationValue}
-                        />
-                    </label>
-                    <input type="button" value="Submit" onClick={this.handleSignUp} />
+                    <TextField
+                        label="Username"
+                        value={this.state.usernameValue}
+                        onChange={this.handleChangeUsernameValue}
+                    /><br />
+                    <TextField
+                        label="Password"
+                        value={this.state.passwordValue}
+                        onChange={this.handleChangePasswordValue}
+                    /><br />
+                    <TextField
+                        label="Password confirmation"
+                        value={this.state.passwordConfirmationValue}
+                        onChange={this.handleChangePasswordConfirmationValue}
+                    /><br />
+                    <Button variant="contained" color="primary" value="Submit" onClick={this.handleSignIn}>
+                        Submit
+                    </Button>
                 </form>
             </div>
         );
     }
 };
 
-export default SignUpCard;
+function mapDispatchToProps(dispatch) {
+    return ({
+        signUp: (username, password) => {
+            signUp(username, password)(dispatch);
+        }
+    })
+}
+
+function mapStateToProps({}) {
+    return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignUpCard));

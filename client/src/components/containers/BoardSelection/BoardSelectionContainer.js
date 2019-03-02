@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux'
 
 import CreateBoard from './BoardCreation/CreateBoard';
@@ -20,6 +21,11 @@ class BoardSelectionContainer extends Component {
         this.moveCard = this.moveCard.bind(this);
     }
 
+    componentWillMount() {
+        if (this.props.authentication.token === '') {
+            this.props.history.push('/');
+        }
+    }
 
     swapArrayElements(arr, indexA, indexB) {
         var temp = arr[indexA];
@@ -67,11 +73,12 @@ BoardSelectionContainer.propTypes = {
 };
 
 
-function mapStateToProps({ createBoard, boardCollection }) {
+function mapStateToProps({ createBoard, boardCollection, authentication }) {
     return {
         createBoard,
         boardCollection,
+        authentication
     };
 };
 
-export default connect(mapStateToProps, {updatePositionBoardInCollection})(BoardSelectionContainer);
+export default withRouter(connect(mapStateToProps, {updatePositionBoardInCollection})(BoardSelectionContainer));

@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
-
+import { withRouter } from 'react-router-dom';
 import '../../../styles/AuthenticationContainer.css';
 import {connect} from "react-redux";
 
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+
 import {signIn} from "../../../actions/SignIn";
+
+const styles = theme => ({
+    button: {
+        margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+    },
+});
 
 
 class SignInCard extends Component {
@@ -31,8 +44,15 @@ class SignInCard extends Component {
         });
     }
 
-    handleSignIn() {
-        this.props.signIn(this.usernameValue, this.passwordValue);
+    handleSignIn(e) {
+        e.preventDefault();
+        this.props.signIn(this.state.usernameValue, this.state.passwordValue)
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.authentication.token !== '') {
+            this.props.history.push('/board');
+        }
     }
 
     render() {
@@ -40,30 +60,26 @@ class SignInCard extends Component {
             <div className="sign-in-card-wrapper">
                 <h3>Sign In</h3>
                 <form>
-                    <label>
-                        Username:
-                        <input
-                            type="text"
-                            value={this.state.usernameValue}
-                            onChange={this.handleChangeUsernameValue}
-                        />
-                    </label>
-                    <label>
-                        Password:
-                        <input
-                            type="text"
-                            value={this.state.passwordValue}
-                            onChange={this.handleChangePasswordValue}
-                        />
-                    </label>
-                <input type="button" value="Submit" onClick={this.handleSignIn} />
+                    <TextField
+                        label="Username"
+                        value={this.state.usernameValue}
+                        onChange={this.handleChangeUsernameValue}
+                    /><br />
+                    <TextField
+                        label="password"
+                        value={this.state.passwordValue}
+                        onChange={this.handleChangePasswordValue}
+                    /><br />
+                    <Button variant="contained" color="primary" value="Submit" onClick={this.handleSignIn}>
+                        Submit
+                    </Button>
                 </form>
             </div>
         );
     }
 }
 
-const mapDispatchToProps = dispatch => {
+function mapDispatchToProps(dispatch) {
     return ({
         signIn: (username, password) => {
             signIn(username, password)(dispatch);
@@ -71,4 +87,10 @@ const mapDispatchToProps = dispatch => {
     })
 }
 
-export default connect(null, mapDispatchToProps)(SignInCard);
+function mapStateToProps({ authentication }) {
+    return {
+        authentication,
+    };
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignInCard)));
