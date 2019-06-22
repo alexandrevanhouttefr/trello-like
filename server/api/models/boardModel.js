@@ -11,7 +11,7 @@ var BoardSchema = new Schema({
     position: {
         type: Number
     },
-    member: {
+    members: {
         type: [Schema.ObjectId],
         required: 'Should have a member',
     },

@@ -5,6 +5,8 @@ var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var mongoose = require('mongoose');
 const path = require('path');
+var cors = require('cors');
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -20,14 +22,17 @@ app.use(function(req, res, next) {
     next();
 });
 
-/**
- * Get HTML Template
- */
-app.get('/', function(req, res) {
-    res.sendFile('index.html', {
-        root: path.join(__dirname, 'views')
-    })
-});
+let whitelist = ['http://localhost:3000','http://localhost:80', undefined];
+let corsOptions = {
+    origin: (origin, callback) => {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }, credentials: true
+};
+app.use(cors(corsOptions));
 
 
 /**
@@ -40,12 +45,15 @@ mongoose.connect('mongodb://localhost:27017/' + config.db.name, { useNewUrlParse
  * Models
  */
 var User = require('./api/models/userModel');
+var Board = require('./api/models/boardModel');
 
 /**
  * Routes
  */
 var userRoutes = require('./api/routes/userRoutes');
+var boardRoutes = require('./api/routes/boardRoutes');
 userRoutes(app);
+boardRoutes(app);
 
 app.listen(app.get('port'), function(){
     console.log( 'Server is listening on port ' + app.get('port'));

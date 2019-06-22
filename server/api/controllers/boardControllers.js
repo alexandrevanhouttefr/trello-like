@@ -18,6 +18,7 @@ exports.createBoard = function(req, res) {
                 var boardData = {
                     name: req.body.name,
                     position: position,
+                    members: [req.userId],
                 };
 
 
@@ -39,5 +40,18 @@ exports.createBoard = function(req, res) {
 };
 
 exports.getBoard = function(req, res) {
+    Board.findOne({members: req.userId})
+        .sort('position')
+        .exec((err, docs) => {
+           return res.send(docs);
+    });
+
+};
+
+exports.addUser = function(req, res) {
+
+};
+
+exports.deleteBoard = function(req, res) {
 
 };

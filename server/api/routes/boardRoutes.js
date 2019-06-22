@@ -3,10 +3,18 @@
 module.exports = function(app) {
 
     var boardControllers = require('../controllers/boardControllers');
+    var verifyToken = require('../verification/verificationToken');
 
     app.route('/board/create')
-        .post(boardControllers.createBoard);
+        .post(verifyToken, boardControllers.createBoard);
 
     app.route('/board/get')
-        .get(boardControllers.getBoard);
+        .get(verifyToken, boardControllers.getBoard);
+
+    app.route('/board/adduser')
+        .get(verifyToken, boardControllers.addUser);
+
+    app.route('/board/delete')
+        .get(verifyToken, boardControllers.deleteBoard);
+
 };
